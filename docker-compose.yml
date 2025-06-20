@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   postgres:
     build:
@@ -9,7 +11,7 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: example_db
     ports:
-      - "5432:5432"
+      - "0.0.0.0:5432:5432"  # ← слушает все интерфейсы (не только localhost)
     volumes:
       - pgdata:/var/lib/postgresql/data
     command: >
@@ -21,8 +23,8 @@ services:
     container_name: clickhouse_db
     restart: always
     ports:
-      - "8123:8123"
-      - "9000:9000"
+      - "0.0.0.0:8123:8123"  # HTTP-интерфейс (для клиентов типа DBeaver)
+      - "0.0.0.0:9000:9000"  # Native-протокол (для clickhouse-client)
     ulimits:
       nofile:
         soft: 262144
@@ -39,7 +41,7 @@ services:
     container_name: mongo_db
     restart: always
     ports:
-      - "27017:27017"
+      - "0.0.0.0:27017:27017"  # MongoDB слушает все интерфейсы
     volumes:
       - mongodb_data:/data/db
 
