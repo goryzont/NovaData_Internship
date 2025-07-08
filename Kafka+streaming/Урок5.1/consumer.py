@@ -7,10 +7,12 @@ from dotenv import load_dotenv
 dotenv_path ='/home/vova/Рабочий стол/NovaData_Личный_проект/.env'
 if os.path.exists(dotenv_path):
     load_dotenv(dotenv_path)
+# Поэтому важно добавить группу, чтобы обозначить анонимные консюмеры и повторного чтения с дублированием не было!!!
 
 consumer = KafkaConsumer(
     "user_events",
-    bootstrap_servers=f"{os.environ.get('HOST')}:9092:9092",
+    bootstrap_servers=f"{os.environ.get('HOST')}:9092",
+    group_id="user-logins-consumer",
     auto_offset_reset='earliest',
     enable_auto_commit=True,
     value_deserializer=lambda x: json.loads(x.decode('utf-8'))
