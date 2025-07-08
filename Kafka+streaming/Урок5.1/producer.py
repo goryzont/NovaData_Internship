@@ -5,7 +5,7 @@ import random
 
 import os
 from dotenv import load_dotenv
-dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+dotenv_path ='/home/vova/Рабочий стол/NovaData_Личный_проект/.env'
 if os.path.exists(dotenv_path):
     load_dotenv(dotenv_path)
 
@@ -24,4 +24,4 @@ while True:
     }
     producer.send("user_events", value=data)
     print("Sent:", data)
-    time.sleep(1)
+    time.sleep(10)

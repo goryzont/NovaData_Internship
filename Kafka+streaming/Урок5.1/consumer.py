@@ -4,7 +4,7 @@ import json
 
 import os
 from dotenv import load_dotenv
-dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+dotenv_path ='/home/vova/Рабочий стол/NovaData_Личный_проект/.env'
 if os.path.exists(dotenv_path):
     load_dotenv(dotenv_path)
 
@@ -17,7 +17,7 @@ consumer = KafkaConsumer(
 )
 
 conn = psycopg2.connect(
-    dbname="test_db", user="admin", password="admin", host="localhost", port=5432
+    dbname="test_db", user="admin", password="admin", host=f"{os.environ.get('HOST')}", port=5432
 )
 cursor = conn.cursor()
 
